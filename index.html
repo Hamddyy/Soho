@@ -779,7 +779,7 @@ function sendOrder() {
     const total = cart.reduce((sum, item) => sum + item.price, 0);
     const phone = "201288316889";
     const whatsappUrl = `https://wa.me/${phone}?text=${encodeURIComponent(
-        message + `\total: ${total} EGP`
+        message + `\ total: ${total} EGP`
     )}`;
 
     window.location.href = whatsappUrl;
