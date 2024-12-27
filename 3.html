@@ -1,217 +1,282 @@
 <!DOCTYPE html>
 <html lang="ar">
+
 <head>
-    <!-- إعدادات الصفحة الأساسية -->
-    <meta charset="UTF-8"> <!-- لضبط الترميز على UTF-8 لدعم النصوص العربية -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- لضبط عرض الصفحة لتتناسب مع مختلف الأجهزة -->
-    <title>Soho Square</title> <!-- عنوان الصفحة -->
-
-    <!-- تنسيقات الصفحة -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Soho Square</title>
     <style>
-        /* تنسيق عام للصفحة */
         body {
-            font-family: Arial, sans-serif; /* الخط المستخدم */
-            direction: rtl; /* الكتابة من اليمين لليسار */
-            text-align: center; /* محاذاة النص إلى المنتصف */
-            background-color: #f9f9f9; /* لون الخلفية */
+            font-family: Arial, sans-serif;
+            direction: rtl;
+            text-align: center;
+            background-color: #f9f9f9;
             margin: 0;
-            padding: 20px 10px;
+            padding: 20px;
         }
 
-        /* عنوان رئيسي للصفحة */
         h1 {
-            font-size: 24px; /* حجم الخط */
-            color: #ff8c00; /* اللون البرتقالي */
-            margin-bottom: 20px; /* مسافة سفلية */
+            font-size: 24px;
+            color: #ff8c00;
+            margin-bottom: 20px;
         }
 
-        /* تنسيق الأقسام (الفئات) */
         .category {
-            margin-bottom: 20px; /* مسافة بين كل فئة */
-            padding: 10px; /* مسافة داخلية */
-            border: 2px solid #ddd; /* إطار رمادي */
-            border-radius: 10px; /* زوايا دائرية */
-            background-color: #f3f3f3; /* لون خلفية فاتح */
-            overflow: hidden; /* منع تجاوز المحتوى */
+            margin-bottom: 40px;
+            padding: 1px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            background-color: #f3f3f3;
+            overflow: hidden;
         }
 
-        /* عنوان كل فئة */
         .category h2 {
-            font-size: 20px; /* حجم الخط */
-            color: #fff; /* لون أبيض */
-            background-color: #ff8c00; /* خلفية برتقالية */
-            display: inline-block; /* عرض كتلة مدمجة */
-            padding: 5px 15px; /* مسافات داخلية */
-            border-radius: 10px; /* زوايا دائرية */
-            margin-bottom: 20px; /* مسافة سفلية */
+            font-size: 20px;
+            color: #fff;
+            background-color: #ff8c00;
+            display: inline-block;
+            padding: 5px 15px;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            margin-bottom: 20px;
         }
 
-        /* المنتجات داخل كل فئة */
         .products {
-            display: flex; /* عرض المنتجات أفقيًا */
-            flex-wrap: nowrap; /* لا تنتقل المنتجات لسطر جديد */
-            overflow-x: auto; /* تمكين التمرير الأفقي */
-            gap: 16px; /* مسافة بين المنتجات */
-            padding: 10px 0; /* مسافة داخلية */
-            scroll-behavior: smooth; /* تمرير سلس */
+            display: flex;
+            flex-wrap: nowrap;
+            overflow-x: auto;
+            gap: 16px;
+            padding: 10px 0;
+            scroll-behavior: smooth;
         }
 
-        /* إعدادات المنتج */
         .product {
-            background-color: #fff; /* خلفية بيضاء */
-            border: 1px solid #ddd; /* إطار رمادي */
-            border-radius: 8px; /* زوايا دائرية */
-            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* ظل خفيف */
-            text-align: center; /* توسيط النص */
-            min-width: 250px; /* عرض المنتج الأدنى */
-            flex: 0 0 auto; /* لا يتمدد */
-            margin: 10px;
-            transition: transform 0.3s ease; /* تأثير عند التفاعل */
+            background-color: #fff;
+            border: 1px solid #ddd;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+            min-width: 250px;
+            flex: 0 0 auto;
         }
 
-        /* تأثير المنتج عند تمرير الماوس */
-        .product:hover {
-            transform: scale(1.05); /* تكبير المنتج */
-        }
-
-        /* صورة المنتج */
         .product img {
-            width: 100%; /* عرض كامل */
-            height: 150px; /* ارتفاع محدد */
-            object-fit: cover; /* ملاءمة الصورة */
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
         }
 
-        /* اسم المنتج */
         .product h1 {
-            font-size: 18px; /* حجم النص */
-            color: #333; /* لون داكن */
-            margin: 10px 0; /* مسافة حول النص */
+            font-size: 18px;
+            color: #333;
+            margin: 10px 0;
         }
 
-        /* وصف المنتج */
         .product p {
-            margin: 5px 0; /* مسافة حول النص */
-            color: #7D7098; /* لون رمادي */
-            font-size: 14px; /* حجم النص */
+            margin: 5px 0;
+            color: #7D7098;
+            font-size: 14px;
         }
 
-        /* زر الإضافة إلى السلة */
-        .product .add-to-cart {
-            display: inline-block; /* عرض كتلة */
-            background-color: #ff8c00; /* لون برتقالي */
-            color: #fff; /* لون النص أبيض */
-            padding: 10px 20px; /* مسافات داخلية */
-            border-radius: 5px; /* زوايا دائرية */
-            cursor: pointer; /* مؤشر الفأرة */
-            margin: 10px auto; /* مسافة حول الزر */
-            transition: background-color 0.3s ease, transform 0.3s ease; /* تأثير عند التفاعل */
+        .product .btn {
+            display: inline-block;
+            background-color: #ff8c00;
+            color: #fff;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 14px;
+            cursor: pointer;
+            margin: 10px auto;
+            transition: background-color 0.3s ease;
         }
 
-        .product .add-to-cart:hover {
-            background-color: #e07b00; /* تغير اللون عند التفاعل */
-            transform: translateY(-2px); /* تحريك الزر */
+        .product .btn:hover {
+            background-color: #e07b00;
+        }
+
+        /* قائمة الهمبرجر */
+        .hamburger-menu {
+            position: fixed;
+            top: 0;
+            right: 0;
+            width: 250px;
+            height: 100%;
+            background-color: #ff8c00;
+            box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2);
+            transform: translateX(100%);
+            transition: transform 0.3s ease;
+            z-index: 1000;
+            overflow-y: auto;
+        }
+
+        .hamburger-menu.open {
+            transform: translateX(0);
+        }
+
+        .hamburger-menu ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
+
+        .hamburger-menu ul li {
+            opacity: 0;
+            transform: translateX(100px);
+            transition: all 0.5s ease;
+        }
+
+        .hamburger-menu.open ul li {
+            opacity: 1;
+            transform: translateX(0);
+        }
+
+        .hamburger-menu a {
+            text-decoration: none;
+            color: #fff;
+            font-size: 18px;
+            padding: 10px 15px;
+            display: block;
+            transition: background-color 0.3s ease;
+        }
+
+        .hamburger-menu a:hover {
+            background-color: #e07b00;
+        }
+
+        .menu-button {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            background-color: #ff8c00;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            padding: 10px 15px;
+            font-size: 18px;
+            cursor: pointer;
+            z-index: 1100;
+        }
+
+        .menu-button:hover {
+            background-color: #e07b00;
+        }
+
+        /* تأثير التكبير على المنتج */
+        .product:active {
+            transform: scale(1.1);
+            transition: transform 0.3s ease-in-out;
         }
     </style>
 </head>
+
 <body>
-    <h1>Soho Square</h1> <!-- عنوان الصفحة الرئيسي -->
-
-    <!-- قائمة التنقل الجانبية -->
-    <button class="menu-button" onclick="toggleMenu()">☰</button> <!-- زر لفتح القائمة الجانبية -->
+    <h1>Soho Square</h1>
+    <!-- زر فتح القائمة -->
+    <button class="menu-button" onclick="toggleMenu()">☰</button>
+    <!-- قائمة الهمبرجر -->
     <div class="hamburger-menu" id="hamburgerMenu">
-        <ul id="menuList"></ul> <!-- قائمة الفئات داخل التنقل -->
+        <ul id="menuList"></ul>
     </div>
-
-    <!-- أقسام المنتجات -->
     <div id="categories"></div>
-
-    <!-- السلة العائمة -->
-    <div class="floating-cart" onclick="toggleCart()">
-        <span id="cart-count">0</span> <!-- عدد العناصر في السلة -->
-        <div class="cart-icon">
-            <img src="https://raw.githubusercontent.com/Hamddyy/Res/refs/heads/main/images/cart.png" alt="سلة المشتريات">
-        </div>
-    </div>
-
-    <!-- السلة المنسدلة -->
-    <div id="cart-dropdown" class="cart-dropdown">
-        <div id="cart-close-btn" class="cart-close-btn" onclick="closeCart()">×</div> <!-- زر إغلاق السلة -->
-        <ul id="cart-list"></ul> <!-- قائمة المنتجات في السلة -->
-        <div class="total-amount">
-            إجمالي المبلغ: <span class="cart-total">0 جنيه</span>
-        </div>
-        <button id="send-order" onclick="sendOrder()">إرسال الطلب</button> <!-- زر إرسال الطلب -->
-    </div>
-
-    <!-- كود JavaScript لإدارة المنتجات والسلة -->
     <script>
-        let allProducts = []; // قائمة المنتجات
-        let cart = []; // السلة
+        let allProducts = [];
 
-        // جلب المنتجات من JSON
         async function fetchProducts() {
             try {
                 const response = await fetch('https://raw.githubusercontent.com/Hamddyy/menu1/refs/heads/main/sohomenu.json');
+                if (!response.ok) throw new Error('Network response was not ok');
                 const data = await response.json();
                 allProducts = data;
-                displayCategories(); // عرض المنتجات
+                displayCategories();
+                createNavigationMenu();
             } catch (error) {
-                console.error('خطأ في تحميل المنتجات:', error);
+                console.error('Error fetching the products:', error);
+                document.getElementById('categories').innerText = 'حدث خطأ أثناء جلب البيانات.';
             }
         }
 
-        // عرض المنتجات
+        function toggleMenu() {
+            const menu = document.getElementById('hamburgerMenu');
+            menu.classList.toggle('open');
+
+            // إضافة تأثير الانزلاق لعناصر القائمة
+            const menuItems = menu.querySelectorAll('ul li');
+            menuItems.forEach((item, index) => {
+                item.style.transitionDelay = `${index * 0.1}s`; // تأخير بسيط بين العناصر
+            });
+        }
+
+        function createNavigationMenu() {
+            const menuList = document.getElementById('menuList');
+            const categoryOrder = [
+                'Main Course', 'Main Meat', 'Main Poultry', 'Sandwiches', 'Appetizer', 'Salad', 'Snacks',
+                'Soup', 'Sides & Topping', 'Dessert', 'Fresh Juice', 'Soft Drink', 'Hot Drinks',
+                'Beer Local', 'I.D Flavors', 'Whisky', 'Vodka', 'Gin', 'Rum', 'Alc Cocktails Local',
+                'Alc. Cocktails Imp.', 'Shisha'
+            ];
+
+            categoryOrder.forEach(category => {
+                const listItem = document.createElement('li');
+                const link = document.createElement('a');
+                link.textContent = category;
+                link.href = `#${category}`;
+                link.onclick = () => toggleMenu(); // يغلق القائمة عند النقر
+                listItem.appendChild(link);
+                menuList.appendChild(listItem);
+            });
+        }
+
         function displayCategories() {
             const categoriesContainer = document.getElementById('categories');
+            categoriesContainer.innerHTML = '';
+            const categoryOrder = [
+                'Main Course', 'Main Meat', 'Main Poultry', 'Sandwiches', 'Appetizer', 'Salad', 'Snacks',
+                'Soup', 'Sides & Topping', 'Dessert', 'Fresh Juice', 'Soft Drink', 'Hot Drinks',
+                'Beer Local', 'I.D Flavors', 'Whisky', 'Vodka', 'Gin', 'Rum', 'Alc Cocktails Local',
+                'Alc. Cocktails Imp.', 'Shisha'
+            ];
+
             const categories = allProducts.reduce((acc, product) => {
                 if (!acc[product.category]) acc[product.category] = [];
                 acc[product.category].push(product);
                 return acc;
             }, {});
 
-            for (const [category, products] of Object.entries(categories)) {
-                const categoryDiv = document.createElement('div');
-                categoryDiv.className = 'category';
-                categoryDiv.innerHTML = `<h2>${category}</h2>`;
-                const productsGrid = document.createElement('div');
-                productsGrid.className = 'products';
+            categoryOrder.forEach(category => {
+                if (categories[category]) {
+                    const categoryDiv = document.createElement('div');
+                    categoryDiv.classList.add('category');
+                    categoryDiv.id = category;
+                    categoryDiv.innerHTML = `<h2>${category}</h2>`;
 
-                products.forEach(product => {
-                    const productDiv = document.createElement('div');
-                    productDiv.className = 'product';
-                    productDiv.innerHTML = `
-                        <img src="${product.image}" alt="${product.name}">
-                        <h1>${product.name}</h1>
-                        <p>${product.description || 'لا توجد تفاصيل'}</p>
-                        <p>${product.price} جنيه</p>
-                        <button class="add-to-cart" onclick="addToCart('${product.name}', ${product.price})">أضف للسلة</button>
-                    `;
-                    productsGrid.appendChild(productDiv);
-                });
+                    const productsGrid = document.createElement('div');
+                    productsGrid.classList.add('products');
 
-                categoryDiv.appendChild(productsGrid);
-                categoriesContainer.appendChild(categoryDiv);
-            }
-        }
+                    categories[category]
+                        .sort((a, b) => a.name.localeCompare(b.name))
+                        .forEach(product => {
+                            const productDiv = document.createElement('div');
+                            productDiv.classList.add('product');
+                            productDiv.innerHTML = `
+                                <img src="${product.image || 'default-image.jpg'}" alt="${product.name}">
+                                <h1>${product.name}</h1>
+                                <p>${product.description || 'لا توجد تفاصيل'}</p>
+                                <p>Price: ${product.price} EGP</p>
+                                <button class="add-to-cart" onclick="addToCart('${product.name}', ${product.price}, '${product.image}')">+ Add</button>
+                            `;
+                            productsGrid.appendChild(productDiv);
+                        });
 
-        // إضافة منتج للسلة
-        function addToCart(name, price) {
-            cart.push({ name, price });
-            updateCartDisplay();
-        }
-
-        // تحديث السلة
-        function updateCartDisplay() {
-            const cartList = document.getElementById('cart-list');
-            cartList.innerHTML = '';
-            cart.forEach(item => {
-                const li = document.createElement('li');
-                li.textContent = `${item.name}: ${item.price} جنيه`;
-                cartList.appendChild(li);
+                    categoryDiv.appendChild(productsGrid);
+                    categoriesContainer.appendChild(categoryDiv);
+                }
             });
         }
 
-        fetchProducts(); // استدعاء جلب البيانات
+        fetchProducts();
     </script>
 </body>
+
 </html>
