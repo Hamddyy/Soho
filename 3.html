@@ -19,12 +19,13 @@
             margin-bottom: 20px;
         }
         .category {
-            margin-bottom: 20px;
+            margin-bottom: 40px;
             padding: 10px;
             border: 2px solid #ddd;
             border-radius: 10px;
             background-color: #f3f3f3;
             overflow: hidden;
+            position: relative;
         }
         .category h2 {
             font-size: 20px;
@@ -35,6 +36,36 @@
             border: 1px solid #ddd;
             border-radius: 10px;
             margin-bottom: 20px;
+        }
+        .carousel-container {
+            position: relative;
+            display: flex;
+            align-items: center;
+        }
+        .carousel-btn {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: #ff8c00;
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            font-size: 24px;
+            cursor: pointer;
+            z-index: 10;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+            transition: background-color 0.3s ease;
+        }
+        .carousel-btn:hover {
+            background-color: #e07b00;
+        }
+        .carousel-btn.left {
+            left: -20px;
+        }
+        .carousel-btn.right {
+            right: -20px;
         }
         .products {
             display: flex;
@@ -54,13 +85,7 @@
             min-width: 250px;
             flex: 0 0 auto;
             margin: 10px;
-            transition: transform 0.3s ease, opacity 0.5s ease;
-            opacity: 0;
-            transform: translateY(20px);
-        }
-        .product.visible {
-            opacity: 1;
-            transform: translateY(0);
+            transition: transform 0.3s ease;
         }
         .product:hover {
             transform: scale(1.05);
@@ -80,7 +105,7 @@
             color: #7D7098;
             font-size: 14px;
         }
-        .product .btn, .product .add-to-cart {
+        .product .add-to-cart {
             display: inline-block;
             background-color: #ff8c00;
             color: #fff;
@@ -92,180 +117,9 @@
             margin: 10px auto;
             transition: background-color 0.3s ease, transform 0.3s ease;
         }
-        .product .btn:hover, .product .add-to-cart:hover {
+        .product .add-to-cart:hover {
             background-color: #e07b00;
             transform: translateY(-2px);
-        }
-        .product .add-to-cart:active {
-            transform: scale(0.95);
-        }
-        .hamburger-menu {
-            position: fixed;
-            top: 0;
-            right: 0;
-            width: 250px;
-            height: 100%;
-            background-color: #ff8c00;
-            box-shadow: -2px 0 5px rgba(0, 0, 0, 0.2);
-            transform: translateX(100%);
-            transition: transform 0.3s ease;
-            z-index: 1000;
-            overflow-y: auto;
-        }
-        .hamburger-menu.open {
-            transform: translateX(0);
-        }
-        .hamburger-menu ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-        }
-        .hamburger-menu li {
-            margin: 10px 0;
-        }
-        .hamburger-menu a {
-            text-decoration: none;
-            color: #fff;
-            font-size: 18px;
-            padding: 10px 15px;
-            display: block;
-            transition: background-color 0.3s ease;
-        }
-        .hamburger-menu a:hover {
-            background-color: #e07b00;
-        }
-        .menu-button {
-            position: fixed;
-            top: 15px;
-            right: 15px;
-            background-color: #ff8c00;
-            color: #fff;
-            border: none;
-            border-radius: 5px;
-            padding: 10px 15px;
-            font-size: 18px;
-            cursor: pointer;
-            z-index: 1100;
-        }
-        .menu-button:hover {
-            background-color: #e07b00;
-        }
-        .add-to-cart {
-            background-color: #ff6600;
-            color: #fff;
-            border: none;
-            padding: 10px 20px;
-            font-size: 16px;
-            border-radius: 5px;
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-        }
-        .add-to-cart:hover {
-            background-color: #ff8533;
-        }
-        .floating-cart {
-            position: fixed;
-            top: 20px;
-            left: 10px;
-            background-color: rgba(255, 255, 255, 0.8);
-            border-radius: 50px;
-            padding: 10px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-            cursor: pointer;
-            transition: background-color 0.3s ease;
-            z-index: 2000;
-        }
-        .floating-cart:hover {
-            background-color: rgba(255, 255, 255, 1);
-        }
-        .cart-icon img {
-            width: 40px;
-            height: 40px;
-        }
-        .cart-details {
-            margin-top: 5px;
-        }
-        .cart-dropdown {
-            display: none;
-            position: fixed;
-            top: 115px;
-            left: 10px; /* تغيير من right إلى left */
-            width: 300px;
-            max-height: 400px;
-            background-color: #fff;
-            border-radius: 20px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-            overflow-y: auto;
-            z-index: 2000;
-            transition: all 0.3s ease-in-out;
-        }
-        .cart-dropdown.show {
-            display: block;
-        }
-        .cart-close-btn {
-            position: sticky;
-            top: 0;
-            text-align: right;
-            padding: 5px;
-            font-size: 24px;
-            color: #ff6600;
-            cursor: pointer;
-            background-color: transparent;
-            border: none;
-            z-index: 1002;
-        }
-        .cart-item {
-            display: flex;
-            align-items: center;
-            margin-bottom: 15px;
-            padding: 1px;
-            border-bottom: 2px solid #ddd;
-        }
-        .cart-item-image {
-            width: 50px;
-            height: 50px;
-            margin-right: 10px;
-            border-radius: 15px;
-        }
-        .cart-item-name {
-            flex-grow: 0.5;
-            font-size: 16px;
-        }
-        .cart-item-price {
-            color: #555;
-        }
-        .delete-btn {
-            flex-grow: 0.5;
-            color: #FF0000;
-        }
-        #send-order {
-            background-color: #ff6600;
-            color: white;
-            border: none;
-            padding: 10px;
-            width: 100%;
-            border-radius: 5px;
-            cursor: pointer;
-            font-size: 16px;
-        }
-        #send-order:hover {
-            background-color: #ff8533;
-        }
-        .notification {
-            position: fixed;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            background-color: #ff8c00;
-            color: #fff;
-            padding: 10px 20px;
-            border-radius: 5px;
-            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
-            opacity: 0;
-            transition: opacity 0.5s ease;
-        }
-        .notification.show {
-            opacity: 1;
         }
         @media (max-width: 600px) {
             .products {
@@ -274,212 +128,50 @@
             .product {
                 min-width: 100%;
             }
-            .cart-dropdown {
-                width: 90%;
-                left: 5%;
-            }
         }
     </style>
 </head>
 <body>
     <h1>Soho Square</h1>
-    <button class="menu-button" onclick="toggleMenu()">☰</button>
-    <div class="hamburger-menu" id="hamburgerMenu">
-        <ul id="menuList"></ul>
-    </div>
-    <div id="categories"></div>
-<div class="floating-cart" onclick="toggleCart()">
-        <span id="cart-count">0</span> <br>
-        <div class="cart-icon">
-            <img src="https://raw.githubusercontent.com/Hamddyy/Res/refs/heads/main/images/cart.png" alt="سلة المشتريات">
-            <div class="cart-details">
-                <span class="cart-total">0 EGP</span>
+    <div class="category">
+        <h2>Category Name</h2>
+        <div class="carousel-container">
+            <button class="carousel-btn left" onclick="scrollCarousel(this, -1)">&#8249;</button>
+            <div class="products">
+                <div class="product">
+                    <img src="https://via.placeholder.com/250" alt="Product 1">
+                    <h1>Product 1</h1>
+                    <p>Description of Product 1</p>
+                    <p>Price: 50 EGP</p>
+                    <button class="add-to-cart">+ Add</button>
+                </div>
+                <div class="product">
+                    <img src="https://via.placeholder.com/250" alt="Product 2">
+                    <h1>Product 2</h1>
+                    <p>Description of Product 2</p>
+                    <p>Price: 75 EGP</p>
+                    <button class="add-to-cart">+ Add</button>
+                </div>
+                <div class="product">
+                    <img src="https://via.placeholder.com/250" alt="Product 3">
+                    <h1>Product 3</h1>
+                    <p>Description of Product 3</p>
+                    <p>Price: 100 EGP</p>
+                    <button class="add-to-cart">+ Add</button>
+                </div>
             </div>
+            <button class="carousel-btn right" onclick="scrollCarousel(this, 1)">&#8250;</button>
         </div>
     </div>
-    <div id="cart-dropdown" class="cart-dropdown">
-        <div id="cart-close-btn" class="cart-close-btn" onclick="closeCart()">×</div>
-        <ul id="cart-list"></ul>
-        <div class="total-amount">
-            إجمالي المبلغ: <span class="cart-total">0 جنيه</span>
-        </div>
-        <button id="send-order" onclick="sendOrder()">إرسال الطلب</button>
-    </div>
+
     <script>
-        let allProducts = [];
-
-        async function fetchProducts() {
-            try {
-                const response = await fetch('https://raw.githubusercontent.com/Hamddyy/menu1/refs/heads/main/sohomenu.json');
-                if (!response.ok) throw new Error('Network response was not ok');
-                const data = await response.json();
-                allProducts = data;
-                displayCategories();
-                createNavigationMenu();
-            } catch (error) {
-                console.error('Error fetching the products:', error);
-                document.getElementById('categories').innerText = 'حدث خطأ أثناء جلب البيانات.';
-            }
-        }
-
-        function toggleMenu() {
-            const menu = document.getElementById('hamburgerMenu');
-            menu.classList.toggle('open');
-        }
-
-        function createNavigationMenu() {
-            const menuList = document.getElementById('menuList');
-            const categoryOrder = [
-                'Main Course', 'Main Meat', 'Main Poultry', 'Sandwiches', 'Appetizer', 'Salad', 'Snacks', 
-                'Soup', 'Sides & Topping', 'Dessert', 'Fresh Juice', 'Soft Drink', 'Hot Drinks', 
-                'Beer Local', 'I.D Flavors', 'Whisky', 'Vodka', 'Gin', 'Rum', 'Alc Cocktails Local', 
-                'Alc. Cocktails Imp.', 'Shisha'
-            ];
-            categoryOrder.forEach(category => {
-                const listItem = document.createElement('li');
-                const link = document.createElement('a');
-                link.textContent = category;
-                link.href = `#${category}`;
-                link.onclick = (event) => {
-                    event.preventDefault();
-                    document.getElementById(category).scrollIntoView({ behavior: 'smooth' });
-                    toggleMenu(); // يغلق القائمة عند النقر
-                };
-                listItem.appendChild(link);
-                menuList.appendChild(listItem);
+        function scrollCarousel(button, direction) {
+            const carousel = button.parentElement.querySelector('.products');
+            const scrollAmount = carousel.clientWidth / 2; // المسافة التي ستتحرك بها
+            carousel.scrollBy({
+                left: direction * scrollAmount,
+                behavior: 'smooth'
             });
-        }
-
-        function displayCategories() {
-            const categoriesContainer = document.getElementById('categories');
-            categoriesContainer.innerHTML = '';
-            const categoryOrder = [
-                'Main Course', 'Main Meat', 'Main Poultry', 'Sandwiches', 'Appetizer', 'Salad', 'Snacks', 
-                'Soup', 'Sides & Topping', 'Dessert', 'Fresh Juice', 'Soft Drink', 'Hot Drinks', 
-                'Beer Local', 'I.D Flavors', 'Whisky', 'Vodka', 'Gin', 'Rum', 'Alc Cocktails Local', 
-                'Alc. Cocktails Imp.', 'Shisha'
-            ];
-            const categories = allProducts.reduce((acc, product) => {
-                if (!acc[product.category]) acc[product.category] = [];
-                acc[product.category].push(product);
-                return acc;
-            }, {});
-            categoryOrder.forEach(category => {
-                if (categories[category]) {
-                    const categoryDiv = document.createElement('div');
-                    categoryDiv.classList.add('category');
-                    categoryDiv.id = category;
-                    categoryDiv.innerHTML = `<h2>${category}</h2>`;
-                    const productsGrid = document.createElement('div');
-                    productsGrid.classList.add('products');
-                    categories[category]
-                        .sort((a, b) => a.name.localeCompare(b.name))
-                        .forEach(product => {
-                            const productDiv = document.createElement('div');
-                            productDiv.classList.add('product');
-                            productDiv.innerHTML = `
-                                <img src="${product.image || 'default-image.jpg'}" alt="${product.name}">
-                                <h1>${product.name}</h1>
-                                <p>${product.description || 'لا توجد تفاصيل'}</p>
-                                <p>Price: ${product.price} EGP</p>
-                                <button class="add-to-cart" onclick="addToCart('${product.name}', ${product.price}, '${product.image}')">+ Add</button>
-                            `;
-                            productsGrid.appendChild(productDiv);
-                        });
-                    categoryDiv.appendChild(productsGrid);
-                    categoriesContainer.appendChild(categoryDiv);
-                }
-            });
-
-            // إضافة تأثيرات عند تحميل الصفحة
-            const products = document.querySelectorAll('.product');
-            products.forEach((product, index) => {
-                setTimeout(() => {
-                    product.classList.add('visible');
-                }, index * 100);
-            });
-        }
-
-        fetchProducts();
-
-        let cart = [];
-
-        function addToCart(name, price, image) {
-            cart.push({ name, price, image });
-            updateCartDisplay();
-            showNotification(`${name} تمت إضافته إلى السلة`);
-        }
-
-        function updateCartDisplay() {
-            const cartList = document.getElementById("cart-list");
-            const cartCount = document.getElementById("cart-count");
-            const cartTotals = document.querySelectorAll(".cart-total");
-
-            cartList.innerHTML = "";
-            let total = 0;
-
-            cart.forEach((item, index) => {
-                const li = document.createElement("li");
-                li.classList.add("cart-item");
-                li.innerHTML = `
-                    <img src="${item.image}" class="cart-item-image" alt="${item.name}">
-                    <span class="cart-item-price">${item.price} EGP</span>
-                    <span class="cart-item-name">${item.name}</span>
-                    <span class="delete-btn" onclick="removeFromCart(${index})"> × </span>
-                `;
-                cartList.appendChild(li);
-                total += item.price;
-            });
-
-            cartTotals.forEach(element => {
-                element.textContent = `${total} EGP`;
-            });
-
-            cartCount.textContent = cart.length;
-        }
-
-        function removeFromCart(index) {
-            cart.splice(index, 1);
-            updateCartDisplay();
-        }
-
-        function toggleCart() {
-            const cartDropdown = document.getElementById("cart-dropdown");
-            cartDropdown.classList.toggle("show");
-        }
-
-        function closeCart() {
-            const cartDropdown = document.getElementById("cart-dropdown");
-            cartDropdown.classList.remove("show");
-        }
-
-        function sendOrder() {
-            if (!cart.length) {
-                alert("السلة فارغة!");
-                return;
-            }
-
-            const message = cart
-                .map((item) => `${item.name}: ${item.price} EGP`)
-                .join("\n");
-
-            const total = cart.reduce((sum, item) => sum + item.price, 0);
-            const phone = "201288316889";
-            const whatsappUrl = `https://wa.me/${phone}?text=${encodeURIComponent(
-                message + `\nإجمالي: ${total} EGP`
-            )}`;
-
-            window.location.href = whatsappUrl;
-        }
-
-        function showNotification(message) {
-            const notification = document.createElement('div');
-            notification.className = 'notification show';
-            notification.innerText = message;
-            document.body.appendChild(notification);
-            setTimeout(() => {
-                notification.remove();
-            }, 3000);
         }
     </script>
 </body>
