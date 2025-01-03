@@ -25,6 +25,7 @@
             border-radius: 10px;
             background-color: #f3f3f3;
             overflow: hidden;
+            position: relative;
         }
         .category h2 {
             font-size: 20px;
@@ -180,7 +181,7 @@
             display: none;
             position: fixed;
             top: 115px;
-            left: 10px; /* تغيير من right إلى left */
+            left: 10px;
             width: 300px;
             max-height: 400px;
             background-color: #fff;
@@ -242,7 +243,7 @@
         #send-order:hover {
             background-color: #ff8533;
         }
-        @media (max-width: 600px) {
+        @media (max-width: 30px) {
             .products {
                 flex-wrap: wrap;
             }
@@ -250,11 +251,39 @@
                 min-width: 100%;
             }
         }
+        .arrow {
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+            background-color: #ff8c00;
+            color: #fff;
+            border: none;
+            border-radius: 50%;
+            width: 40px;
+            height: 40px;
+            cursor: pointer;
+            font-size: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: background-color 0.3s ease, transform 0.3s ease;
+        }
+        .arrow:hover {
+            background-color: #e07b00;
+            transform: scale(1.1);
+        }
+        .arrow-left {
+            left: 10px;
+        }
+        .arrow-right {
+            right: 10px;
+        }
     </style>
 </head>
 <body>
     <h1>Soho Square</h1>
-    <button class="menu-button" onclick="toggleMenu()">☰</button>
+  <button class="menu-button" onclick="toggleMenu()">☰</button>
     <div class="hamburger-menu" id="hamburgerMenu">
         <ul id="menuList"></ul>
     </div>
@@ -271,10 +300,12 @@
     <div id="cart-dropdown" class="cart-dropdown">
         <div id="cart-close-btn" class="cart-close-btn" onclick="closeCart()">×</div>
         <ul id="cart-list"></ul>
+        <button>
         <div class="total-amount">
             إجمالي المبلغ: <span class="cart-total">0 جنيه</span>
         </div>
-      <button id="send-order" onclick="sendOrder()">إرسال الطلب</button>
+        </button>
+        <button id="send-order" onclick="sendOrder()">إرسال الطلب</button>
     </div>
     <script>
         let allProducts = [];
@@ -313,8 +344,8 @@
                 link.href = `#${category}`;
                 link.onclick = (event) => {
                     event.preventDefault();
+                    toggleMenu();
                     document.getElementById(category).scrollIntoView({ behavior: 'smooth' });
-                    toggleMenu(); // يغلق القائمة عند النقر
                 };
                 listItem.appendChild(link);
                 menuList.appendChild(listItem);
@@ -359,6 +390,23 @@
                         });
                     categoryDiv.appendChild(productsGrid);
                     categoriesContainer.appendChild(categoryDiv);
+
+                    // Add navigation arrows
+                    const leftArrow = document.createElement('button');
+                    leftArrow.classList.add('arrow', 'arrow-left');
+                    leftArrow.innerHTML = '&#9664;';
+                    leftArrow.onclick = () => {
+                        productsGrid.scrollBy({ left: -250, behavior: 'smooth' });
+                    };
+                    categoryDiv.appendChild(leftArrow);
+
+                    const rightArrow = document.createElement('button');
+                    rightArrow.classList.add('arrow', 'arrow-right');
+                    rightArrow.innerHTML = '&#9654;';
+                    rightArrow.onclick = () => {
+                        productsGrid.scrollBy({ left: 250, behavior: 'smooth' });
+                    };
+                    categoryDiv.appendChild(rightArrow);
                 }
             });
         }
@@ -384,7 +432,7 @@
                 const li = document.createElement("li");
                 li.classList.add("cart-item");
                 li.innerHTML = `
-                    <img src="${item.image}" class="cart-item-image" alt="${item.name}">
+                    <img src="${item.image}" class="cart-item-image">
                     <span class="cart-item-price">${item.price} EGP</span>
                     <span class="cart-item-name">${item.name}</span>
                     <span class="delete-btn" onclick="removeFromCart(${index})"> × </span>
@@ -428,7 +476,7 @@
             const total = cart.reduce((sum, item) => sum + item.price, 0);
             const phone = "201288316889";
             const whatsappUrl = `https://wa.me/${phone}?text=${encodeURIComponent(
-                message + `\nإجمالي: ${total} EGP`
+                message + `\total: ${total} EGP`
             )}`;
 
             window.location.href = whatsappUrl;
